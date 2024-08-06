@@ -1,1 +1,25 @@
-login-model
+
+     <div id="login-form-div" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            
+            <form id="login-form" class="form" action="/user" method="POST">
+                <p class="title">Login</p>
+                <p class="message">Sign in to access your account.</p>
+                <label>
+                    <span>Email</span><br>
+                    <input id="login-email" required="" placeholder="" type="email" class="input"><br>
+                    
+                </label>
+            
+                <label>
+                    <span>Password</span><br>
+                    <input id="login-password" required="" placeholder="" type="password" class="input"><br>
+                   
+                </label>
+                <button class="submit">Login</button>
+                <button id="forgotPasswordbtn" type="button" class="submit"> Forgot Password </button>
+                <p class="signin">Don't have an account? <a href="#">Sign up</a></p>
+            </form>                
+        </div>
+    </div>
