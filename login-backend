@@ -1,1 +1,27 @@
-
+exports.login = async (req, res, next) =>  {
+    let transaction = await sequelize.transaction();
+    try {
+        const isExistingUser = await User.findByPk(req.body.email);
+        if(isExistingUser) {
+            const validPassword = await bcrypt.compare(req.body.password, isExistingUser.password);
+            if(!validPassword) {
+                console.log("Incorrect Password");
+                return res.status(401).json({message: 'Incorrect Password'});
+            };
+            const token = jwt.sign({ email: req.body.email }, secretKey);
+            const responsePayLoad = {
+                isPremiumUser : isExistingUser.isPremiumUser,
+                email : isExistingUser.email,
+                token: token
+            }
+            console.log("User login sucessfull");
+            return res.status(200).json(responsePayLoad);
+        } else {
+            console.log("No user found");
+            return res.status(404).json({ message: "User not found" });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json('Internal Server Error');
+    }
+};
