@@ -1,0 +1,2 @@
+Expense.belongsTo(User);
+User.hasMany(Expense);
